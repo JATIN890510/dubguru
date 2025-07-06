@@ -3,41 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DubGuru - AI Video Dubbing App</title>
+  <title>DubGuru - AI Dubbing App</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background-color: #f4f4f4; color: #333; }
+    header { background-color: #1e1e2f; padding: 1rem 2rem; color: #fff; text-align: center; }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    nav { margin-top: 0.5rem; }
+    .container { max-width: 900px; margin: auto; padding: 2rem; }
+    .card { background: #fff; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .card h2 { margin-bottom: 1rem; color: #444; }
+    .input-group { margin-bottom: 1rem; }
+    .input-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+    .input-group input, .input-group textarea, .input-group select {
+      width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 6px;
     }
-    h1 {
-      font-size: 48px;
-      color: #22d3ee;
+    .btn {
+      background-color: #4caf50; color: #fff; padding: 0.8rem 1.5rem;
+      border: none; border-radius: 6px; cursor: pointer; font-weight: bold;
     }
-    p {
-      font-size: 20px;
-      color: #94a3b8;
-      margin-top: 10px;
-    }
-    .footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 14px;
-      color: #64748b;
+    .btn:hover { background-color: #45a049; }
+    footer {
+      text-align: center; padding: 1rem; background-color: #1e1e2f; color: #fff;
     }
   </style>
 </head>
 <body>
-  <h1>DubGuru</h1>
-  <p>AI-Powered Video Dubbing App (Beta)</p>
-  <div class="footer">
-    Made with ❤ | Contact: 7339822003
+
+  <header>
+    <h1>DubGuru</h1>
+    <nav>AI-Powered Video Dubbing & Script to Voice Platform</nav>
+  </header>
+
+  <div class="container">
+    
+    <div class="card">
+      <h2>🎤 Generate Voice from Script</h2>
+      <div class="input-group">
+        <label for="script">Enter Your Script</label>
+        <textarea id="script" rows="6" placeholder="Type or paste your Hindi/English script here..."></textarea>
+      </div>
+      <div class="input-group">
+        <label for="voice">Select Voice Type</label>
+        <select id="voice">
+          <option>Male (Hindi)</option>
+          <option>Female (Hindi)</option>
+          <option>Male (English)</option>
+          <option>Female (English)</option>
+        </select>
+      </div>
+      <button class="btn">Generate Voice</button>
+    </div>
+
+    <div class="card">
+      <h2>📤 Upload Your Video</h2>
+      <div class="input-group">
+        <label for="upload">Select Video File</label>
+        <input type="file" id="upload" accept="video/*" />
+      </div>
+      <button class="btn">Dub Uploaded Video</button>
+    </div>
+
+    <div class="card">
+      <h2>🔗 Or Paste YouTube Video Link</h2>
+      <div class="input-group">
+        <label for="youtube">YouTube URL</label>
+        <input type="url" id="youtube" placeholder="https://www.youtube.com/watch?v=..." />
+      </div>
+      <button class="btn">Dub YouTube Video</button>
+    </div>
+
   </div>
+
+  <footer>
+    Made with ❤ by DubGuru Team | Contact: 7339822003
+  </footer>
+
 </body>
 </html>
