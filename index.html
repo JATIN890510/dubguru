@@ -3,81 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DubGuru - AI Dubbing App</title>
+  <title>DubGuru - AI Video Dubbing App</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { background-color: #f4f4f4; color: #333; }
-    header { background-color: #1e1e2f; padding: 1rem 2rem; color: #fff; text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    nav { margin-top: 0.5rem; }
-    .container { max-width: 900px; margin: auto; padding: 2rem; }
-    .card { background: #fff; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .card h2 { margin-bottom: 1rem; color: #444; }
-    .input-group { margin-bottom: 1rem; }
-    .input-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-    .input-group input, .input-group textarea, .input-group select {
-      width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 6px;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
     }
-    .btn {
-      background-color: #4caf50; color: #fff; padding: 0.8rem 1.5rem;
-      border: none; border-radius: 6px; cursor: pointer; font-weight: bold;
+    header {
+      background-color: #1e1e1e;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #333;
     }
-    .btn:hover { background-color: #45a049; }
+    .container {
+      padding: 30px 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    label {
+      font-size: 1.1em;
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+    input[type="text"], select {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #1e1e1e;
+      color: #fff;
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+    button {
+      background: #00c853;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #00e676;
+    }
     footer {
-      text-align: center; padding: 1rem; background-color: #1e1e2f; color: #fff;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #888;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>DubGuru</h1>
-    <nav>AI-Powered Video Dubbing & Script to Voice Platform</nav>
-  </header>
-
+  <header>DubGuru - AI Dubbing App</header>
   <div class="container">
-    
-    <div class="card">
-      <h2>🎤 Generate Voice from Script</h2>
-      <div class="input-group">
-        <label for="script">Enter Your Script</label>
-        <textarea id="script" rows="6" placeholder="Type or paste your Hindi/English script here..."></textarea>
-      </div>
-      <div class="input-group">
-        <label for="voice">Select Voice Type</label>
-        <select id="voice">
-          <option>Male (Hindi)</option>
-          <option>Female (Hindi)</option>
-          <option>Male (English)</option>
-          <option>Female (English)</option>
-        </select>
-      </div>
-      <button class="btn">Generate Voice</button>
-    </div>
+    <label for="videoLink">🎥 Paste YouTube Video Link:</label>
+    <input type="text" id="videoLink" placeholder="https://youtube.com/xyz123" />
 
-    <div class="card">
-      <h2>📤 Upload Your Video</h2>
-      <div class="input-group">
-        <label for="upload">Select Video File</label>
-        <input type="file" id="upload" accept="video/*" />
-      </div>
-      <button class="btn">Dub Uploaded Video</button>
-    </div>
+    <label for="voiceLang">🎙 Choose Voice Language:</label>
+    <select id="voiceLang">
+      <option value="hindi">Hindi (Male)</option>
+      <option value="hindi_female">Hindi (Female)</option>
+      <option value="english">English (Male)</option>
+      <option value="english_female">English (Female)</option>
+    </select>
 
-    <div class="card">
-      <h2>🔗 Or Paste YouTube Video Link</h2>
-      <div class="input-group">
-        <label for="youtube">YouTube URL</label>
-        <input type="url" id="youtube" placeholder="https://www.youtube.com/watch?v=..." />
-      </div>
-      <button class="btn">Dub YouTube Video</button>
-    </div>
+    <label for="style">✨ Choose Style:</label>
+    <select id="style">
+      <option value="anime">Anime Style</option>
+      <option value="realistic">Realistic</option>
+      <option value="cartoon">Cartoon</option>
+    </select>
 
+    <button onclick="generateVoice()">🔊 Generate Dubbing</button>
+
+    <div id="status" style="margin-top:20px; text-align:center;"></div>
   </div>
 
   <footer>
-    Made with ❤ by DubGuru Team | Contact: 7339822003
+    Made with ❤ | Admin Contact: 7339822003 | © DubGuru
   </footer>
 
+  <script>
+    function generateVoice() {
+      const link = document.getElementById("videoLink").value;
+      const lang = document.getElementById("voiceLang").value;
+      const style = document.getElementById("style").value;
+      const status = document.getElementById("status");
+
+      if (!link.trim()) {
+        status.innerHTML = "<span style='color:red;'>❌ Please enter a video link.</span>";
+        return;
+      }
+
+      status.innerHTML = "<span style='color:lightgreen;'>⏳ Processing... Please wait...</span>";
+
+      setTimeout(() => {
+        status.innerHTML = <span style='color:#00e676;'>✅ Dubbing in "${lang}" with "${style}" style generated successfully! (demo)</span>;
+      }, 2500);
+    }
+  </script>
 </body>
 </html>
